@@ -4,6 +4,8 @@ const router = express.Router();
 const {documentoExiste, getKindOfDocs} = require('../controllers/registro.controller');
 
 
+
+
 router.get('/numDocExiste/query', documentoExiste);
 
 router.get('/', (req, res)=> {
