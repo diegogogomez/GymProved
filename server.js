@@ -1,4 +1,7 @@
-require('./database')
+require('dotenv').config();
+console.log(process.env.NODE_ENV);
+require('./database');
+
 const express = require('express');
 const registro = require('./routes/registro')
 const cors = require('cors');
