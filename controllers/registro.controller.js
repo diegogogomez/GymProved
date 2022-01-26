@@ -27,6 +27,27 @@ const documentoExiste = async (req, res) => {
     return res.status(200).json({ success: true, codigo: 11, msg: 'Documento de registro valido.' })
 }
 
+const usuarioNuevo = async (req, res) => {
+    try{
+        // console.log('body', req.body);
+        res.status(200).json(req.body)
+        const uNuevo = await users.create(req.body);
+    }catch (error){
+        console.log('Error');
+    }
+}
+
+const getUsers = async (req, res) => {
+    try{
+        const usuarios = await users.find({});
+        res.status(200).json(usuarios);
+    }catch (error){
+        console.log(error)
+    }
+}
+
+
+
 
 let tiposDocumento = [  {nombre: 'Cédula de ciudadanía', codigo: 1},
     {nombre: 'Cédula de extranjería', codigo: 2},
@@ -39,4 +60,4 @@ const getKindOfDocs = async (req, res) => {
     res.json(kindOfDoc);
 }
 
-module.exports = {documentoExiste, getKindOfDocs}
+module.exports = {documentoExiste, getKindOfDocs, usuarioNuevo, getUsers}

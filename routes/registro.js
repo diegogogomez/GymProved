@@ -1,7 +1,7 @@
 const express = require('express')
 const KindOfDoc = require('../models/kindOfDoc')
 const router = express.Router();
-const {documentoExiste, getKindOfDocs} = require('../controllers/registro.controller');
+const {documentoExiste, getKindOfDocs, usuarioNuevo, getUsers} = require('../controllers/registro.controller');
 
 
 
@@ -11,6 +11,8 @@ router.get('/numDocExiste/query', documentoExiste);
 router.get('/', (req, res)=> {
     res.send('<h1>hola respuestas</h1>')
 })
+
+router.route('/usuarios', usuarioNuevo).post(usuarioNuevo).get(getUsers)
 
 
 router.get('/kindOfDocs', getKindOfDocs);

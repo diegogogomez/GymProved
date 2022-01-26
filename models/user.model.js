@@ -21,4 +21,4 @@ const usersSchema = new Schema(
     }
 )
 
-module.exports =model('users', usersSchema)
+module.exports =model('user', usersSchema)

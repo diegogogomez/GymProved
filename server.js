@@ -14,6 +14,8 @@ app.use(express.static('./public'));
 app.use(cors());
 
 
+// Middlewares
+app.use(express.json())
 app.use(morgan('dev'))
 
 // Routes
