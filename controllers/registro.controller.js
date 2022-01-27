@@ -8,12 +8,13 @@ const documentoExiste = async (req, res) => {
     let numDocumento = Number(numDoc)
     let tipoDocumento = Number(id)
 
-    const esperar = setTimeout( () => {
-        console.log('Espera terminada')
-    }, 2000);
+    console.log(numDocumento)
+    console.log(tipoDocumento)
 
-    const kindOfDoc = await users.findOne({numberDoc: numDocumento, typeOfDoc: tipoDocumento});
+    // const kindOfDoc = await users.findOne({numberDoc: numDocumento, typeOfDoc: tipoDocumento});
+    const kindOfDoc = await users.findOne({numberDocument: numDocumento, typeOfDoc: tipoDocumento});
 
+    console.log({kindOfDoc})
 
     if( !( numDocumento < 2000000000 && numDocumento > 0 && tipoDocumento < 6) ) {
         return res.status(400).json({success: false, codigo: 12, msg: 'Número de documento invalido'})
@@ -29,11 +30,12 @@ const documentoExiste = async (req, res) => {
 
 const usuarioNuevo = async (req, res) => {
     try{
-        // console.log('body', req.body);
-        res.status(200).json(req.body)
+        console.log('body', req.body);
         const uNuevo = await users.create(req.body);
+        res.status(200).json(req.body);
     }catch (error){
         console.log('Error');
+        res.status(400).json(error);
     }
 }
 
