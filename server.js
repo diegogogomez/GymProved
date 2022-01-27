@@ -7,6 +7,7 @@ const registro = require('./routes/registro')
 const cors = require('cors');
 var exportado = require('./libreria1')
 var morgan = require('morgan')
+var morganBody = require('morgan-body');
 
 var app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 
 
 // Middlewares
+morganBody(app);
 app.use(express.json())
 app.use(morgan('dev'))
 
