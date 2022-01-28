@@ -18,28 +18,32 @@ const userExist = async (req, res) => {
         msg: ''
     };
 
-    const existKindOfDoc = await KindOfDoc.findOne({ idDoc: tipoDocumento });
     const kindOfDoc = await users.findOne({numberDocument: numDocumento, typeOfDoc: tipoDocumento});
+    const existKindOfDoc = await KindOfDoc.findOne({ idDoc: tipoDocumento });
 
-    // console.log("Existen: ", {kindOfDoc, existKindOfDoc});
+    console.log("Existen: ", {kindOfDoc, existKindOfDoc, numDocumento, tipoDocumento});
 
+    // Si el documento no es valido o el tipo de documento ingresado no existe
     if( !( numDocumento < 2000000000 && numDocumento > 1000 && existKindOfDoc) ) {
         userInfoReturn.msg = 'El número o tipo de documento no es valido.'
         return userInfoReturn;
     }
 
+    // Si el existe
     if(kindOfDoc) {
-        // console.log({kindOfDoc})
-        return res.status(200).json
-            ({ existKindOfDoc,
-                success: true,
-                codigo: 10,
-                msg: 'El número de documento ingresado ya existe en nuestra base de datos.'
-            })
+        userInfoReturn.valid = true;
+        userInfoReturn.exist = true;
+        userInfoReturn.msg = 'El número y tipo de documento ingresado ya existe en nuestra base de datos!.';
+        return userInfoReturn;
     }
 
-    return res.status(200).json({ existKindOfDoc, success: true, codigo: 11, msg: 'Documento de registro valido.' })
-
+    // Si no existe el usuario y el tipo de documento es valido
+    if(!kindOfDoc && existKindOfDoc) {
+        userInfoReturn.exist = false;
+        userInfoReturn.active = false;
+        userInfoReturn.valid = true;
+        return userInfoReturn;
+    }
     return false;
 }
 
@@ -49,22 +53,34 @@ const documentoExiste = async (req, res) => {
         if(!respuesta?.valid){
             return res.status(400)
                 .json({
-                    "respuesta" : respuesta?.valid,
                     success: false,
                     codigo: 12,
                     msg: respuesta?.msg
                 })
         }
 
+        if(respuesta?.exist) {
+            return res.status(200).json({
+                success: true,
+                codigo: 10,
+                msg: respuesta?.msg
+            })
+        }
 
-        /*if(!respuesta.valid) {
-            return res.status(400)
-                .json({success: false, codigo: 12, msg: 'Número de documento invalido'})
-        }*/
+        if(respuesta.exist || !respuesta.valid) {
+            return res.status(200).json({
+                success: true,
+                codigo: 10,
+                msg: respuesta?.msg
+            })
+        }
 
-        console.log(respuesta);
+        return res.status(200).json({
+            success: true,
+            codigo: 11,
+            msg: respuesta?.msg
+        })
     })
-
 }
 
 const usuarioNuevo = async (req, res) => {
