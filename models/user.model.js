@@ -41,4 +41,4 @@ const usersSchema = new Schema(
     }
 )
 
-module.exports =model('user', usersSchema)
+module.exports = model('user', usersSchema)

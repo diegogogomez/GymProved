@@ -18,7 +18,8 @@ const userExist = async (req, res) => {
         msg: ''
     };
 
-    const kindOfDoc = await users.findOne({numberDocument: numDocumento, typeOfDoc: tipoDocumento});
+    // const kindOfDoc = await users.findOne({numberDocument: numDocumento, typeOfDoc: tipoDocumento});
+    const kindOfDoc = await users.findOne({ $and: [{ numberDocument: numDocumento }, { typeOfDoc: tipoDocumento }]});
     const existKindOfDoc = await KindOfDoc.findOne({ idDoc: tipoDocumento });
 
     console.log("Existen: ", {kindOfDoc, existKindOfDoc, numDocumento, tipoDocumento});
