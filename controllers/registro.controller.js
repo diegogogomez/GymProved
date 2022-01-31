@@ -105,16 +105,8 @@ const getUsers = async (req, res) => {
 }
 
 
-
-
-let tiposDocumento = [  {nombre: 'Cédula de ciudadanía', codigo: 1},
-    {nombre: 'Cédula de extranjería', codigo: 2},
-    {nombre: 'Número de identidad', codigo: 3},
-    {nombre: 'Número de licencia', codigo: 4},
-    {nombre: 'Registro civil', codigo: 5}];
-
 const getKindOfDocs = async (req, res) => {
-    const kindOfDoc = await KindOfDoc.find().lean()
+    const kindOfDoc = await KindOfDoc.find().sort('name')
     res.json(kindOfDoc);
 }
 
