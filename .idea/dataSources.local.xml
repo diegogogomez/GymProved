@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="WS-211.7628.25">
-    <data-source name="@localhost" uuid="a9fa64bf-e53c-4c38-8e00-e35cb785d9da">
-      <database-info product="Mongo DB" version="5.0.5" jdbc-version="4.2" driver-name="MongoDB JDBC Driver" driver-version="1.13" dbms="MONGO" exact-version="5.0.5" exact-driver-version="1.13" />
+    <data-source name="test@cluster0.rhwax.mongodb.net" uuid="b89f58c1-f724-43a4-bc23-052c6433d77b">
+      <database-info product="Mongo DB" version="4.4.12" jdbc-version="4.2" driver-name="MongoDB JDBC Driver" driver-version="1.13" dbms="MONGO" exact-version="4.4.12" exact-driver-version="1.13" />
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <secret-storage>master_key</secret-storage>
+      <user-name>diego</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema" qname="dbGym" />
+          <node kind="schema">
+            <name qname="dbGymV1Dev" />
+            <name qname="dbGymV1Prod" />
+            <name qname="proyecto3" />
+            <name qname="proyecto4" />
+          </node>
         </introspection-scope>
       </schema-mapping>
     </data-source>

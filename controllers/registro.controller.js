@@ -86,8 +86,28 @@ const documentoExiste = async (req, res) => {
 
 const usuarioNuevo = async (req, res) => {
     try{
-        console.log('body', req.body);
-        const uNuevo = await users.create(req.body);
+        const { firstName, lastName, typeOfDoc, numberDocument, email, dateBorn } = req.body;
+        let usuarioNuevo = {};
+        if(firstName) {
+            usuarioNuevo.firstName = firstName
+        }
+        if(lastName) {
+            usuarioNuevo.lastName = lastName
+        }
+        if(typeOfDoc.idDoc) {
+            usuarioNuevo.typeOfDoc = typeOfDoc.idDoc
+        }
+        if(numberDocument) {
+            usuarioNuevo.numberDocument = numberDocument
+        }
+        if(email) {
+            usuarioNuevo.email = email
+        }
+        if(dateBorn) {
+            usuarioNuevo.dateBorn = dateBorn
+        }
+        console.log({firstName})
+        const uNuevo = await users.create(usuarioNuevo);
         res.status(200).json(req.body);
     }catch (error){
         console.log('Error');

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="a9fa64bf-e53c-4c38-8e00-e35cb785d9da">
+    <data-source source="LOCAL" name="test@cluster0.rhwax.mongodb.net" uuid="b89f58c1-f724-43a4-bc23-052c6433d77b">
       <driver-ref>mongo</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
-      <jdbc-url>mongodb://localhost:27017</jdbc-url>
+      <jdbc-url>mongodb+srv://cluster0.rhwax.mongodb.net/test</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
