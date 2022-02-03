@@ -30,15 +30,36 @@ const usersSchema = new Schema(
             type: Number,
             required: true
         },
+        kindOfDoc2: {
+            type: Schema.Types.ObjectId,
+            ref: 'TypeOfDoc2'
+        },
         numberDocument: {
             type: Number,
             required: true
         }
     },
     {
-        timestamps: false,
+        timestamps: true,
         versionKey:false
     }
 )
 
-module.exports = model('user', usersSchema)
+const typeOfDoc2Schema = new Schema({
+    _id: Schema.Types.ObjectId,
+    idDoc: {
+        type: Number
+    },
+    name: String,
+    active: Boolean
+},
+    {
+        timestamps: false,
+        versionKey: false
+    })
+
+const TypeOfDoc2 = model('TypeOfDoc2', typeOfDoc2Schema)
+const User = model('User', usersSchema)
+
+// module.exports = model('user', usersSchema)
+module.exports = { User, TypeOfDoc2 }

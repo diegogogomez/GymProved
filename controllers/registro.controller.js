@@ -1,6 +1,6 @@
 
 const KindOfDoc = require('../models/kindOfDoc')
-const users = require('../models/user.model')
+const { User } = require('../models/user.model')
 
 /*
 * Helper function, used for detect if user exist and is active in the system
@@ -18,8 +18,8 @@ const userExist = async (req, res) => {
         msg: ''
     };
 
-    // const kindOfDoc = await users.findOne({numberDocument: numDocumento, typeOfDoc: tipoDocumento});
-    const kindOfDoc = await users.findOne({ $and: [{ numberDocument: numDocumento }, { typeOfDoc: tipoDocumento }]});
+    // const kindOfDoc = await User.findOne({numberDocument: numDocumento, typeOfDoc: tipoDocumento});
+    const kindOfDoc = await User.findOne({ $and: [{ numberDocument: numDocumento }, { typeOfDoc: tipoDocumento }]});
     const existKindOfDoc = await KindOfDoc.findOne({ idDoc: tipoDocumento });
 
     console.log("Existen: ", {kindOfDoc, existKindOfDoc, numDocumento, tipoDocumento});
@@ -94,8 +94,10 @@ const usuarioNuevo = async (req, res) => {
         if(lastName) {
             usuarioNuevo.lastName = lastName
         }
-        if(typeOfDoc.idDoc) {
-            usuarioNuevo.typeOfDoc = typeOfDoc.idDoc
+        if(typeOfDoc._id) {
+            usuarioNuevo.kindOfDoc2 = typeOfDoc._id;
+            console.log('Tipo documento: ', usuarioNuevo.kindOfDoc2 );
+            usuarioNuevo.typeOfDoc = 1;
         }
         if(numberDocument) {
             usuarioNuevo.numberDocument = numberDocument
@@ -107,7 +109,7 @@ const usuarioNuevo = async (req, res) => {
             usuarioNuevo.dateBorn = dateBorn
         }
         console.log({firstName})
-        const uNuevo = await users.create(usuarioNuevo);
+        const uNuevo = await User.create(usuarioNuevo);
         res.status(200).json(req.body);
     }catch (error){
         console.log('Error');
@@ -117,7 +119,7 @@ const usuarioNuevo = async (req, res) => {
 
 const getUsers = async (req, res) => {
     try{
-        const usuarios = await users.find({});
+        const usuarios = await User.find({});
         res.status(200).json(usuarios);
     }catch (error){
         console.log(error)

@@ -4,6 +4,7 @@ require('./database');
 
 const express = require('express');
 const registro = require('./routes/registro')
+const { kindOfDoc } = require('./routes/kindOfDoc.routes')
 const cors = require('cors');
 var exportado = require('./libreria1')
 var morgan = require('morgan')
@@ -22,6 +23,7 @@ app.use(morgan('dev'))
 
 // Routes
 app.use('/api/registro', registro)
+app.use('/api/v1', kindOfDoc)
 
 
 app.listen(5000, () => {
